@@ -3,7 +3,6 @@ package hu.unideb.notetakingapp.api.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
