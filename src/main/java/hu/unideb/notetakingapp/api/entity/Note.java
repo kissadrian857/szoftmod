@@ -13,6 +13,9 @@ public class Note extends BaseEntity {
     @Column(name = "body")
     private String body;
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "date_of_creation")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate creationDate;
@@ -57,8 +60,9 @@ public class Note extends BaseEntity {
         this.creatorUser = creatorUser;
     }
 
-    public Note(String body, LocalDate creationDate, LocalDate lastModifiedDate, User creatorUser) {
+    public Note(String body, String title, LocalDate creationDate, LocalDate lastModifiedDate, User creatorUser) {
         this.body = body;
+        this.title = title;
         this.creationDate = creationDate;
         this.lastModifiedDate = lastModifiedDate;
         this.creatorUser = creatorUser;
