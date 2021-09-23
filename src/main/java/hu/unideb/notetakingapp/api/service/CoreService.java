@@ -1,8 +1,10 @@
 package hu.unideb.notetakingapp.api.service;
 
+import hu.unideb.notetakingapp.api.entity.BaseEntity;
+
 import java.util.Set;
 
-public interface CoreService<T, ID> {
+public interface CoreService<T extends BaseEntity, ID> {
     Set<T> findAll();
 
     T findById(ID id);

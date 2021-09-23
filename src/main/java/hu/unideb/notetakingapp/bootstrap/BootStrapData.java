@@ -16,7 +16,6 @@ public class BootStrapData implements CommandLineRunner {
 
     private final UserRepository userRepository;
 
-    //itt injektáljuk be a bean-eket!
     public BootStrapData(NoteRepository noteRepository, UserRepository userRepository) {
         this.noteRepository = noteRepository;
         this.userRepository = userRepository;
