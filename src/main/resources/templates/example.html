@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ThymeLeaf demo page</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Password hash</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getUserName()}"></td>
+        <td th:text="${user.getPasswordHash()}"></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>body</th>
+        <th>Date of creation</th>
+        <th>Last modification</th>
+        <th>Creator name</th>
+    </tr>
+    <tr th:each="note : ${notes}">
+        <td th:text="${note.getTitle()}"></td>
+        <td th:text="${note.getBody()}"></td>
+        <td th:text="${note.getCreationDate()}"></td>
+        <td th:text="${note.getLastModifiedDate()}"></td>
+        <td th:text="${note.getCreatorUser().getUserName()}"></td>
+    </tr>
+</table>
+</body>
+</html>

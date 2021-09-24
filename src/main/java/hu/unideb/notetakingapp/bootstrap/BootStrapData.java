@@ -4,8 +4,6 @@ import hu.unideb.notetakingapp.api.entity.Note;
 import hu.unideb.notetakingapp.api.entity.User;
 import hu.unideb.notetakingapp.api.service.NoteService;
 import hu.unideb.notetakingapp.api.service.UserService;
-import hu.unideb.notetakingapp.backend.dao.NoteRepository;
-import hu.unideb.notetakingapp.backend.dao.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

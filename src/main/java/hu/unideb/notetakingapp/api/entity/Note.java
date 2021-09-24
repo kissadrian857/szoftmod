@@ -60,6 +60,14 @@ public class Note extends BaseEntity {
         this.creatorUser = creatorUser;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Note(String body, String title, LocalDate creationDate, LocalDate lastModifiedDate, User creatorUser) {
         this.body = body;
         this.title = title;
