@@ -2,6 +2,8 @@ package hu.unideb.notetakingapp.bootstrap;
 
 import hu.unideb.notetakingapp.api.entity.Note;
 import hu.unideb.notetakingapp.api.entity.User;
+import hu.unideb.notetakingapp.api.service.NoteService;
+import hu.unideb.notetakingapp.api.service.UserService;
 import hu.unideb.notetakingapp.backend.dao.NoteRepository;
 import hu.unideb.notetakingapp.backend.dao.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -12,13 +14,13 @@ import java.time.LocalDate;
 @Component
 public class BootStrapData implements CommandLineRunner {
 
-    private final NoteRepository noteRepository;
+    private final NoteService noteService;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public BootStrapData(NoteRepository noteRepository, UserRepository userRepository) {
-        this.noteRepository = noteRepository;
-        this.userRepository = userRepository;
+    public BootStrapData(NoteService noteService, UserService userService) {
+        this.noteService = noteService;
+        this.userService = userService;
     }
 
     @Override
@@ -29,15 +31,13 @@ public class BootStrapData implements CommandLineRunner {
         Note note2 = new Note("randomBody2...", "title2", LocalDate.now(), null, user1);
         Note note3 = new Note("randomBody3...", "title3", LocalDate.now(), null, user2);
 
-        userRepository.save(user1);
-        userRepository.save(user2);
+        userService.save(user1);
+        userService.save(user2);
 
-        noteRepository.save(note);
-        noteRepository.save(note2);
-        noteRepository.save(note3);
+        noteService.save(note);
+        noteService.save(note2);
+        noteService.save(note3);
 
         System.out.println("Started in Bootstrap...");
-        System.out.println("Number of notes: " + noteRepository.count());
-        System.out.println("Number of users:" + userRepository.count());
     }
 }
