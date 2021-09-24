@@ -39,4 +39,12 @@ public class User extends BaseEntity {
 
     public User() {
     }
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
+    }
 }
