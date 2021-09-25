@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Your notes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/notes.css}">
+</head>
+<body>
+<div id="container">
+    <div id="sidebar">
+        <div id="sidebar-content">
+            titles
+        </div>
+    </div><div id="content">
+        <div id="main-content">
+            notes
+            <p th:text="'username: ' + ${username}" />
+            <p th:text="'password: ' + ${password}" />
+        </div>
+    </div>
+</div>
+</body>
+</html>

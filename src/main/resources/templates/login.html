@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Note taking app</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/login.css}">
+</head>
+<body>
+<center>
+    <p>Note taking app</p>
+    <!--HIBA: A form nem adját a paramétereket-->
+    <form th:action="@{/login}" method="post">
+        Username:
+        <input type="text" th:field="${username}">
+        <br>
+        Password:
+        <input type="password" th:field="${password}">
+        <br>
+        <input type="submit" value="Login">
+    </form>
+</center>
+</body>
+</html>
