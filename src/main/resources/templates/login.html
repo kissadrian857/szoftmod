@@ -8,13 +8,12 @@
 <body>
 <center>
     <p>Note taking app</p>
-    <!--HIBA: A form nem adját a paramétereket-->
-    <form th:action="@{/login}" method="post">
+    <form th:action="@{/login}" th:object="${user}" method="post">
         Username:
-        <input type="text" th:field="${username}">
+        <input type="text" th:field="*{userName}">
         <br>
         Password:
-        <input type="password" th:field="${password}">
+        <input type="password" th:field="*{passwordHash}">
         <br>
         <input type="submit" value="Login">
     </form>

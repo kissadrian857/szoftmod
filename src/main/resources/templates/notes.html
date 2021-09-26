@@ -4,18 +4,31 @@
     <title>Your notes</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/notes.css}">
+    <script>
+        function note(x) {
+            document.getElementById("main-content").innerHTML = x;
+        }
+    </script>
 </head>
 <body>
 <div id="container">
     <div id="sidebar">
         <div id="sidebar-content">
-            titles
+            <table>
+                <tr>
+                    <th>Titles</th>
+                </tr>
+                <tr th:each="note : ${notes}">
+                    <td th:text="${note.getTitle()}" th:attr="onclick=|note('${note.getBody()}')|"></td>
+                </tr>
+            </table>
         </div>
     </div><div id="content">
         <div id="main-content">
-            notes
-            <p th:text="'username: ' + ${username}" />
-            <p th:text="'password: ' + ${password}" />
+            Select a title!
+            Login details:
+            <p th:text="'username: ' + ${user.userName}" />
+            <p th:text="'password: ' + ${user.passwordHash}" />
         </div>
     </div>
 </div>
