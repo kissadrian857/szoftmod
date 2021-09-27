@@ -3,6 +3,7 @@ package hu.unideb.notetakingapp.backend.service.impl;
 import hu.unideb.notetakingapp.api.entity.User;
 import hu.unideb.notetakingapp.api.service.UserService;
 import hu.unideb.notetakingapp.backend.dao.BaseEntityRepository;
+import hu.unideb.notetakingapp.backend.dao.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +14,7 @@ public class UserServiceImpl extends CoreServiceImpl<User> implements UserServic
 
     @Override
     public User findByUsername(String username) {
-        //TODO implement
-        return null;
+        User u = ((UserRepository)baseEntityRepository).findByUsername(username);
+        return u;
     }
 }

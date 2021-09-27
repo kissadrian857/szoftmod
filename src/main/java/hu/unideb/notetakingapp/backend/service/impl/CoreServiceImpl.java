@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public abstract class CoreServiceImpl<T extends BaseEntity> implements CoreService<T> {
-    private final BaseEntityRepository<T> baseEntityRepository;
+    protected final BaseEntityRepository<T> baseEntityRepository;
 
     public CoreServiceImpl(BaseEntityRepository<T> baseEntityRepository) {
         this.baseEntityRepository = baseEntityRepository;
