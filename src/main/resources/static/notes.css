@@ -1,0 +1,30 @@
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	height: 100%;
+}
+
+#container {
+	height: 100%;
+}
+
+#sidebar {
+	background-color: #ccc;
+	display: inline-block;
+	vertical-align: top;
+	height: 100%;
+	width: 20%;
+	overflow: auto;
+}
+
+#content {
+	background-color: #ffc;
+	display: inline-block;
+	vertical-align: top;
+	height: 100%;
+	width: 80%;
+	overflow: auto;
+}

@@ -39,5 +39,7 @@ public class BootStrapData implements CommandLineRunner {
         noteService.save(note3);
 
         System.out.println("Started in Bootstrap...");
+		
+        System.out.println("Webpage available at: http://localhost:8080/login");
     }
 }
