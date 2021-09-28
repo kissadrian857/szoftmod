@@ -42,5 +42,8 @@ public class BootStrapData implements CommandLineRunner {
 
         User u = userService.findByUsername("randomUserName2");
         System.out.println(u.getUserName() + " " + u.getPasswordHash());
+
+        //TODO: User.equals
+        System.out.println(user1.equals(new User("randomUserName", "randomPasswd")));
     }
 }

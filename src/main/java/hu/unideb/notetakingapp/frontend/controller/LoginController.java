@@ -12,16 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class LoginController {
+
     private final LoggedInUserBean loggedInUserBean;
-
-    private final UserService userService;
-
-    private final NoteService noteService;
 
     public LoginController(LoggedInUserBean loggedInUserBean, UserService userService, NoteService noteService) {
         this.loggedInUserBean = loggedInUserBean;
-        this.userService = userService;
-        this.noteService = noteService;
     }
 
     @GetMapping({"", "/login"})
@@ -33,11 +28,11 @@ public class LoginController {
     @PostMapping({"", "/login"})
     public String LoginSubmit(@ModelAttribute User user, Model model) {
         loggedInUserBean.setLoggedInUser(user);
-        model.addAttribute("user", user);
-        model.addAttribute("users",userService.findAll());
-        model.addAttribute("notes",noteService.findAll());
-        //TODO: authenticaton
-        return "redirect:/notes";
+
+        if (loggedInUserBean.isLoggedIn())
+            return "redirect:/notes";
+        else
+            return "login";
     }
 
 }
