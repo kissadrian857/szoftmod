@@ -49,6 +49,9 @@ public class BootStrapData implements CommandLineRunner {
         User u = userService.findByUsername("randomUserName2");
         System.out.println(u.getUserName() + " " + u.getPasswordHash());
 
+        //TODO: User.equals
+        System.out.println(user1.equals(new User("randomUserName", "randomPasswd")));
+
         Shared shared1 = new Shared(1L, 1L);
         Shared shared2 = new Shared(1L, 2L);
         Shared shared3 = new Shared(2L, 1L);
@@ -72,5 +75,6 @@ public class BootStrapData implements CommandLineRunner {
         for (Shared s : sharedList) {
             System.out.println(s.getUserId() + " " + s.getNoteId());
         }
+
     }
 }
