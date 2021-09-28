@@ -23,6 +23,15 @@
                 </tr>
             </table>
         </div>
+        <form th:action="@{/noteadd}" th:object="${new_note}" method="post">
+            Title:
+            <input type="text" th:field="*{title}">
+            <br>
+            Body:
+            <input type="text" th:field="*{body}">
+            <br>
+            <input type="submit" value="Save">
+        </form>
     </div><div id="content">
         <div id="main-content">
             Select a title!

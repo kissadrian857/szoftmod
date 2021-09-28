@@ -1,13 +1,15 @@
 package hu.unideb.notetakingapp.frontend.controller;
 
 import hu.unideb.notetakingapp.api.entity.Note;
-import hu.unideb.notetakingapp.api.entity.User;
 import hu.unideb.notetakingapp.api.service.NoteService;
 import hu.unideb.notetakingapp.api.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 
 @Controller
@@ -27,14 +29,22 @@ public class NotesController {
     @GetMapping("/notes")
     public String LoginForm(Model model) {
         if (loggedInUserBean.isLoggedIn()) {
+            model.addAttribute("new_note", new Note());
             model.addAttribute("user", loggedInUserBean.getLoggedInUser());
             model.addAttribute("notes", noteService.findAll().stream()
-                    .filter(note -> note.getCreatorUser().equals(loggedInUserBean.getLoggedInUser()))
+                    .filter(note -> note.getCreatorUser().getUserName().equals(loggedInUserBean.getLoggedInUser().getUserName()))
                     .sorted(Comparator.comparing(Note::getTitle))
                     .toArray());
             return "notes";
-        }
-        else
+        } else
             return "redirect:/login";
+    }
+
+    @PostMapping("/noteadd")
+    public String addNote(@ModelAttribute Note note, Model model) {
+        note.setCreationDate(LocalDate.now());
+        note.setCreatorUser(userService.findByUsername(loggedInUserBean.getLoggedInUser().getUserName()));
+        noteService.save(note);
+        return "redirect:/notes";
     }
 }
