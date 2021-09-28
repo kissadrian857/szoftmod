@@ -1,6 +1,7 @@
 package hu.unideb.notetakingapp.bootstrap;
 
 import hu.unideb.notetakingapp.api.entity.Note;
+import hu.unideb.notetakingapp.api.entity.Shared;
 import hu.unideb.notetakingapp.api.entity.User;
 import hu.unideb.notetakingapp.api.service.NoteService;
 import hu.unideb.notetakingapp.api.service.SharedService;
@@ -9,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 public class BootStrapData implements CommandLineRunner {
@@ -46,5 +48,33 @@ public class BootStrapData implements CommandLineRunner {
 
         User u = userService.findByUsername("randomUserName2");
         System.out.println(u.getUserName() + " " + u.getPasswordHash());
+
+        //TODO: User.equals
+        System.out.println(user1.equals(new User("randomUserName", "randomPasswd")));
+
+        Shared shared1 = new Shared(1L, 1L);
+        Shared shared2 = new Shared(1L, 2L);
+        Shared shared3 = new Shared(2L, 1L);
+        Shared shared4 = new Shared(2L, 3L);
+
+        sharedService.save(shared1);
+        sharedService.save(shared2);
+        sharedService.save(shared3);
+        sharedService.save(shared4);
+
+        List<Shared> sharedRecords;
+
+        sharedRecords = sharedService.findByUserId(1L);
+        printList(sharedRecords);
+        System.out.println("============");
+        sharedRecords = sharedService.findByUserId(2L);
+        printList(sharedRecords);
+    }
+
+    public static void printList(List<Shared> sharedList) {
+        for (Shared s : sharedList) {
+            System.out.println(s.getUserId() + " " + s.getNoteId());
+        }
+
     }
 }
