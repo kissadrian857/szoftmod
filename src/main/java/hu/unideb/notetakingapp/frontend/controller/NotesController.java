@@ -43,7 +43,7 @@ public class NotesController {
     @PostMapping("/noteadd")
     public String addNote(@ModelAttribute Note note, Model model) {
         note.setCreationDate(LocalDate.now());
-        note.setCreatorUser(userService.findByUsername(loggedInUserBean.getLoggedInUser().getUserName()));
+        note.setCreatorUser(loggedInUserBean.getLoggedInUser());
         noteService.save(note);
         return "redirect:/notes";
     }

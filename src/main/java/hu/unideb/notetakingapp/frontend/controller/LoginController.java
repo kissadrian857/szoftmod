@@ -1,22 +1,23 @@
 package hu.unideb.notetakingapp.frontend.controller;
 
-import hu.unideb.notetakingapp.api.service.NoteService;
+import hu.unideb.notetakingapp.api.entity.User;
 import hu.unideb.notetakingapp.api.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import hu.unideb.notetakingapp.api.entity.User;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoginController {
 
     private final LoggedInUserBean loggedInUserBean;
 
-    public LoginController(LoggedInUserBean loggedInUserBean, UserService userService, NoteService noteService) {
+    private final UserService userService;
+
+    public LoginController(LoggedInUserBean loggedInUserBean, UserService userService) {
         this.loggedInUserBean = loggedInUserBean;
+        this.userService = userService;
     }
 
     @GetMapping({"", "/login"})
@@ -27,7 +28,8 @@ public class LoginController {
 
     @PostMapping({"", "/login"})
     public String LoginSubmit(@ModelAttribute User user, Model model) {
-        loggedInUserBean.setLoggedInUser(user);
+        User actUser = userService.findByUsername(user.getUserName());
+        loggedInUserBean.setLoggedInUser(actUser);
 
         if (loggedInUserBean.isLoggedIn())
             return "redirect:/notes";
