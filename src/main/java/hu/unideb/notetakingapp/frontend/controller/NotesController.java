@@ -84,6 +84,7 @@ public class NotesController {
     public String updateNote(@ModelAttribute("note") Note note, Model model) {
         selectedNote().setTitle(note.getTitle());
         selectedNote().setBody(note.getBody());
+        selectedNote().setLastModifiedDate(LocalDate.now());
         noteService.save(selectedNote());
 
         selectedNoteBean.setSelectedNote(null);
