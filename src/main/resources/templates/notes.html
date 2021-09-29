@@ -27,7 +27,7 @@
                     <td>
                         <a th:href="@{/noteDelete(id=${note.getId()})}" class="btn btn-danger ml-2">Delete</a>
                         <a th:href="@{/initUpdate(id=${note.getId()})}" class="btn btn-danger ml-2">Update</a>
-                        <form th:if="${is_visible}" th:action="@{/updateNote}" th:object="${selected_note}" method="post">
+                        <form th:if="${is_visible} and ${selected_note.getId()}==${note.getId()}" th:action="@{/updateNote}" th:object="${selected_note}" method="post">
                             Title:
                             <input type="text" th:field="*{title}">
                             <br>

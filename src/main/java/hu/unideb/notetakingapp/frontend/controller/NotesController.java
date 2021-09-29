@@ -1,6 +1,7 @@
 package hu.unideb.notetakingapp.frontend.controller;
 
 import hu.unideb.notetakingapp.api.entity.Note;
+import hu.unideb.notetakingapp.api.entity.User;
 import hu.unideb.notetakingapp.api.service.NoteService;
 import hu.unideb.notetakingapp.api.service.UserService;
 import hu.unideb.notetakingapp.frontend.controller.helper.IsFormVisibleBean;
@@ -58,7 +59,8 @@ public class NotesController {
     @PostMapping("/noteadd")
     public String addNote(@ModelAttribute Note note, Model model) {
         note.setCreationDate(LocalDate.now());
-        note.setCreatorUser(loggedInUserBean.getLoggedInUser());
+        User actUser = userService.findByUsername(loggedInUserBean.getLoggedInUser().getUserName());
+        note.setCreatorUser(actUser);
         noteService.save(note);
         return "redirect:/notes";
     }
