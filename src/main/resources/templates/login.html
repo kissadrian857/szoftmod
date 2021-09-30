@@ -1,20 +1,24 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Note taking app</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>The Note taking app</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/login.css}">
 </head>
 <body>
-    <div>Note taking app</div>
+<div class="bg"></div>
+<div class="card">
+    <div id="headercontainer">
+        <p>Notes</p>
+    </div>
     <form th:action="@{/login}" th:object="${user}" method="post">
-        <div>Username:</div>
-        <input type="text" th:field="*{userName}">
-        <div>Password:</div>
-        <input type="password" th:field="*{passwordHash}">
-        <br>
-        <input type="submit" value="Login">
+        <input type="text" th:field="*{userName}" placeholder="Name" autofocus>
+        <br/>
+        <input type="password" th:field="*{passwordHash}" placeholder="Password">
+        <br/>
+        <div id="incorrect_credentials" th:if="${incorrect_credentials}">Incorrect credentials!</div>
+        <div id="button_container"><input type="submit" value="Login"></div>
     </form>
-    <div id="incorrect_credentials" th:if="${incorrect_credentials}">Incorrect credentials!</div>
+</div>
 </body>
 </html>
