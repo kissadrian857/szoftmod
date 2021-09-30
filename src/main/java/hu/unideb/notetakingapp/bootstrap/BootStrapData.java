@@ -29,7 +29,7 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user1 = new User("asd", "asd");
+        User user1 = new User("randomUserName", "randomPasswd");
         User user2 = new User("randomUserName2", "randomPasswd2");
         Note note = new Note("randomBody...", "title1", LocalDate.now(), null, user1);
         Note note2 = new Note("randomBody2...", "title2", LocalDate.now(), null, user1);
