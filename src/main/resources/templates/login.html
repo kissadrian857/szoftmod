@@ -6,17 +6,15 @@
     <link rel="stylesheet" type="text/css" th:href="@{/login.css}">
 </head>
 <body>
-<center>
-    <p>Note taking app</p>
+    <div>Note taking app</div>
     <form th:action="@{/login}" th:object="${user}" method="post">
-        Username:
+        <div>Username:</div>
         <input type="text" th:field="*{userName}">
-        <br>
-        Password:
+        <div>Password:</div>
         <input type="password" th:field="*{passwordHash}">
         <br>
         <input type="submit" value="Login">
     </form>
-</center>
+    <div id="incorrect_credentials" th:if="${incorrect_credentials}">Incorrect credentials!</div>
 </body>
 </html>
