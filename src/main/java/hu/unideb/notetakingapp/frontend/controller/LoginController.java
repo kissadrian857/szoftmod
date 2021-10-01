@@ -1,8 +1,6 @@
 package hu.unideb.notetakingapp.frontend.controller;
 
 import hu.unideb.notetakingapp.api.entity.User;
-import hu.unideb.notetakingapp.api.service.NoteService;
-import hu.unideb.notetakingapp.api.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,7 @@ public class LoginController {
 
     private final LoggedInUserBean loggedInUserBean;
 
-    public LoginController(LoggedInUserBean loggedInUserBean, UserService userService, NoteService noteService) {
+    public LoginController(LoggedInUserBean loggedInUserBean) {
         this.loggedInUserBean = loggedInUserBean;
     }
 
