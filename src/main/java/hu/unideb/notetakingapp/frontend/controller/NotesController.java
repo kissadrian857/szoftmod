@@ -56,19 +56,24 @@ public class NotesController {
         return "notes";
     }
 
-    @PostMapping("/noteadd")
-    public String addNote(@ModelAttribute Note note, Model model) {
+    @GetMapping("/addNote")
+    public String addNote(Model model) {
         if (!loggedInUserBean.isLoggedIn())
             return "redirect:/login";
 
+        Note note = new Note();
+        note.setTitle("");
+        note.setBody("");
         note.setCreationDate(LocalDate.now());
         User actUser = userService.findByUsername(loggedInUserBean.getLoggedInUser().getUserName());
         note.setCreatorUser(actUser);
         noteService.save(note);
+        selectedNoteBean.setSelectedNote(note);
+        isFormVisibleBean.setVisible(true);
         return "redirect:/notes";
     }
 
-    @GetMapping("/noteDelete")
+    @GetMapping("/deleteNote")
     public String deleteNote(@RequestParam Long id, Model model) {
         if (!loggedInUserBean.isLoggedIn())
             return "redirect:/login";
@@ -78,7 +83,7 @@ public class NotesController {
         return "redirect:/notes";
     }
 
-    @GetMapping("/initUpdate")
+    @GetMapping("/selectNote")
     public String initUpdate(@RequestParam Long id, Model model) {
         if (!loggedInUserBean.isLoggedIn())
             return "redirect:/login";

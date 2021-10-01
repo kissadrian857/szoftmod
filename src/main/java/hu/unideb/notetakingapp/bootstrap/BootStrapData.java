@@ -29,7 +29,7 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user1 = new User("randomUserName", "randomPasswd");
+        User user1 = new User("", "");
         User user2 = new User("randomUserName2", "randomPasswd2");
         Note note = new Note("randomBody...", "title1", LocalDate.now(), null, user1);
         Note note2 = new Note("randomBody2...", "title2", LocalDate.now(), null, user1);
@@ -40,17 +40,15 @@ public class BootStrapData implements CommandLineRunner {
 
         noteService.save(note);
         noteService.save(note2);
-        noteService.save(note3);
+
+        System.out.println(note3.getId());
+        System.out.println(noteService.save(note3).getId());
+        System.out.println(note3.getId());
 
         System.out.println("Started in Bootstrap...");
 
-        System.out.println("Webpage available at: http://localhost:8080/login");
-
         User u = userService.findByUsername("randomUserName2");
         System.out.println(u.getUserName() + " " + u.getPasswordHash());
-
-        //TODO: User.equals
-        System.out.println(user1.equals(new User("randomUserName", "randomPasswd")));
 
         Shared shared1 = new Shared(1L, 1L);
         Shared shared2 = new Shared(1L, 2L);
@@ -69,6 +67,9 @@ public class BootStrapData implements CommandLineRunner {
         System.out.println("============");
         sharedRecords = sharedService.findByUserId(2L);
         printList(sharedRecords);
+
+
+        System.out.println("Webpage available at: http://localhost:8080/login");
     }
 
     public static void printList(List<Shared> sharedList) {
