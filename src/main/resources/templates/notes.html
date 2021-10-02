@@ -11,8 +11,11 @@
     </script>
 </head>
 <body>
-<div id="container">
-    <div id="sidebar">
+<header>
+    Your notes
+</header>
+<main id="container">
+    <selection id="sidebar" class="card">
         <div id="sidebar-content">
             <table>
                 <thead>
@@ -23,19 +26,22 @@
                 </thead>
                 <tbody>
                 <tr th:each="note : ${notes}">
-                    <td th:text="${note.getTitle()}" th:attr="onclick=|note('${note.getBody()}')|"/>
+                    <td th:text="${note.getTitle()}" th:attr="onclick=|note('${note.getBody()}')|"></td>
                     <td>
                         <a th:href="@{/noteDelete(id=${note.getId()})}" class="btn btn-danger ml-2">Delete</a>
                         <a th:href="@{/initUpdate(id=${note.getId()})}" class="btn btn-danger ml-2">Update</a>
-                        <form th:if="${is_visible} and ${selected_note.getId()}==${note.getId()}" th:action="@{/updateNote}" th:object="${selected_note}" method="post">
-                            Title:
-                            <input type="text" th:field="*{title}">
-                            <br>
-                            Body:
-                            <input type="text" th:field="*{body}">
-                            <br>
-                            <input type="submit" value="Update">
-                        </form>
+                        <div class="update-note" th:if="${is_visible} and ${selected_note.getId()}==${note.getId()}">
+                            <form th:action="@{/updateNote}" th:object="${selected_note}" method="post" id="updateform">
+                                <input type="text" th:field="*{title}" placeholder="Title">
+                                <br/>
+                                <input type="text" th:field="*{body}" placeholder="Now write something fantastic..."
+                                       th:form="updateform">
+                                <br/>
+                                <input type="submit" value="Update">
+                            </form>
+
+                        </div>
+
                     </td>
                 </tr>
                 </tbody>
@@ -43,23 +49,21 @@
             </table>
         </div>
         <form th:action="@{/noteadd}" th:object="${new_note}" method="post">
-            Title:
-            <input type="text" th:field="*{title}">
+            <input type="text" th:field="*{title}" placeholder="Title">
             <br>
-            Body:
-            <input type="text" th:field="*{body}">
+            <input type="text" th:field="*{body}" placeholder="Now write something fantastic...">
             <br>
             <input type="submit" value="Save">
         </form>
-    </div>
-    <div id="content">
+    </selection>
+    <article id="content" class="card">
         <div id="main-content">
             Select a title!
             Login details:
             <p th:text="'username: ' + ${user.userName}"/>
             <p th:text="'password: ' + ${user.passwordHash}"/>
         </div>
-    </div>
-</div>
+    </article>
+</main>
 </body>
 </html>
