@@ -25,9 +25,7 @@ public class LoginController {
 
     @PostMapping({"", "/login"})
     public String LoginSubmit(@ModelAttribute User user, Model model) {
-        loggedInUserBean.setLoggedInUser(user);
-
-        if (loggedInUserBean.isLoggedIn())
+        if (loggedInUserBean.login(user.getUserName(), user.getPasswordHash()))
             return "redirect:/notes";
         else {
             model.addAttribute("incorrect_credentials", true);
