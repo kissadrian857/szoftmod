@@ -65,8 +65,7 @@ public class NotesController {
         note.setTitle("");
         note.setBody("");
         note.setCreationDate(LocalDate.now());
-        User actUser = userService.findByUsername(loggedInUserBean.getLoggedInUser().getUserName());
-        note.setCreatorUser(actUser);
+        note.setCreatorUser(loggedInUserBean.getLoggedInUser());
         noteService.save(note);
         selectedNoteBean.setSelectedNote(note);
         isFormVisibleBean.setVisible(true);
@@ -79,7 +78,9 @@ public class NotesController {
             return "redirect:/login";
 
         Note toDelete = noteService.findById(id);
-        noteService.delete(toDelete);
+        if (toDelete != null && toDelete.getCreatorUser().equals(loggedInUserBean.getLoggedInUser())) {
+            noteService.delete(toDelete);
+        }
         return "redirect:/notes";
     }
 
@@ -89,8 +90,10 @@ public class NotesController {
             return "redirect:/login";
 
         Note updatable = noteService.findById(id);
-        selectedNoteBean.setSelectedNote(updatable);
-        isFormVisibleBean.setVisible(true);
+        if (updatable != null && updatable.getCreatorUser().equals(loggedInUserBean.getLoggedInUser())) {
+            selectedNoteBean.setSelectedNote(updatable);
+            isFormVisibleBean.setVisible(true);
+        }
         return "redirect:/notes";
     }
 
@@ -99,13 +102,14 @@ public class NotesController {
         if (!loggedInUserBean.isLoggedIn())
             return "redirect:/login";
 
-        selectedNote().setTitle(note.getTitle());
-        selectedNote().setBody(note.getBody());
-        selectedNote().setLastModifiedDate(LocalDate.now());
-        noteService.save(selectedNote());
-
-        selectedNoteBean.setSelectedNote(null);
-        isFormVisibleBean.setVisible(false);
+        if (note != null && note.getTitle() != null && note.getBody() != null) {
+            selectedNote().setTitle(note.getTitle());
+            selectedNote().setBody(note.getBody());
+            selectedNote().setLastModifiedDate(LocalDate.now());
+            noteService.save(selectedNote());
+            selectedNoteBean.setSelectedNote(null);
+            isFormVisibleBean.setVisible(false);
+        }
         return "redirect:/notes";
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 @Service
-@Scope(value= WebApplicationContext.SCOPE_SESSION, proxyMode= ScopedProxyMode.TARGET_CLASS)
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class LoggedInUserBean {
 
     private User loggedInUser;
@@ -27,13 +27,22 @@ public class LoggedInUserBean {
         this.userService = userService;
     }
 
+    public boolean login(String username, String password) {
+        if (username == null || password == null)
+            return false;
+        if (userService.findByUsername(username) == null)
+            return false;
+        if (userService.findByUsername(username).getPasswordHash().equals(password)) {
+            loggedInUser = userService.findByUsername(username);
+            return true;
+        } else return false;
+    }
+
+    public void logout() {
+        loggedInUser = null;
+    }
+
     public boolean isLoggedIn() {
-        if (loggedInUser == null)
-            return false;
-        if (userService.findByUsername(loggedInUser.getUserName()) == null)
-            return false;
-        else
-            return userService.findByUsername(loggedInUser.getUserName())
-                    .getPasswordHash().equals(loggedInUser.getPasswordHash());
+        return loggedInUser != null;
     }
 }
