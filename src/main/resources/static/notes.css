@@ -4,27 +4,39 @@ html {
 
 body {
 	margin: 0;
-	height: 100%;
-}
-
-#container {
+	display: flex;
 	height: 100%;
 }
 
 #sidebar {
 	background-color: #ccc;
-	display: inline-block;
-	vertical-align: top;
 	height: 100%;
 	width: 20%;
 	overflow: auto;
 }
 
-#content {
-	background-color: #ffc;
-	display: inline-block;
-	vertical-align: top;
+#editor {
 	height: 100%;
 	width: 80%;
-	overflow: auto;
+}
+
+#editor > form {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+#title {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+#body {
+	background-color: #ffc;
+	resize: none;
+	margin: 0px;
+	padding: 5px;
+	box-sizing: border-box;
+	width: 100%;
+	flex-grow: 1;
 }

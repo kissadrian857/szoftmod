@@ -43,37 +43,51 @@ public class NotesController {
     }
 
     @GetMapping("/notes")
-    public String LoginForm(Model model) {
-        if (loggedInUserBean.isLoggedIn()) {
-            model.addAttribute("new_note", new Note());
-            model.addAttribute("user", loggedInUserBean.getLoggedInUser());
-            model.addAttribute("notes", noteService.findAll().stream()
-                    .filter(note -> note.getCreatorUser().getUserName().equals(loggedInUserBean.getLoggedInUser().getUserName()))
-                    .sorted(Comparator.comparing(Note::getTitle))
-                    .toArray());
-            return "notes";
-        } else
+    public String Notes(Model model) {
+        if (!loggedInUserBean.isLoggedIn())
             return "redirect:/login";
+
+        model.addAttribute("new_note", new Note());
+        model.addAttribute("user", loggedInUserBean.getLoggedInUser());
+        model.addAttribute("notes", noteService.findAll().stream()
+                .filter(note -> note.getCreatorUser().getUserName().equals(loggedInUserBean.getLoggedInUser().getUserName()))
+                .sorted(Comparator.comparing(Note::getTitle))
+                .toArray());
+        return "notes";
     }
 
-    @PostMapping("/noteadd")
-    public String addNote(@ModelAttribute Note note, Model model) {
+    @GetMapping("/addNote")
+    public String addNote(Model model) {
+        if (!loggedInUserBean.isLoggedIn())
+            return "redirect:/login";
+
+        Note note = new Note();
+        note.setTitle("");
+        note.setBody("");
         note.setCreationDate(LocalDate.now());
         User actUser = userService.findByUsername(loggedInUserBean.getLoggedInUser().getUserName());
         note.setCreatorUser(actUser);
         noteService.save(note);
+        selectedNoteBean.setSelectedNote(note);
+        isFormVisibleBean.setVisible(true);
         return "redirect:/notes";
     }
 
-    @GetMapping("/noteDelete")
+    @GetMapping("/deleteNote")
     public String deleteNote(@RequestParam Long id, Model model) {
+        if (!loggedInUserBean.isLoggedIn())
+            return "redirect:/login";
+
         Note toDelete = noteService.findById(id);
         noteService.delete(toDelete);
         return "redirect:/notes";
     }
 
-    @GetMapping("/initUpdate")
+    @GetMapping("/selectNote")
     public String initUpdate(@RequestParam Long id, Model model) {
+        if (!loggedInUserBean.isLoggedIn())
+            return "redirect:/login";
+
         Note updatable = noteService.findById(id);
         selectedNoteBean.setSelectedNote(updatable);
         isFormVisibleBean.setVisible(true);
@@ -82,6 +96,9 @@ public class NotesController {
 
     @PostMapping("/updateNote")
     public String updateNote(@ModelAttribute("note") Note note, Model model) {
+        if (!loggedInUserBean.isLoggedIn())
+            return "redirect:/login";
+
         selectedNote().setTitle(note.getTitle());
         selectedNote().setBody(note.getBody());
         selectedNote().setLastModifiedDate(LocalDate.now());
