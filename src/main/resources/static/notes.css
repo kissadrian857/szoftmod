@@ -1,42 +1,96 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 html {
-	height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 body {
-	margin: 0;
-	display: flex;
-	height: 100%;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    min-height: 100vh;
 }
 
-#sidebar {
-	background-color: #ccc;
-	height: 100%;
-	width: 20%;
-	overflow: auto;
+header {
+    background-color: saddlebrown;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+    color: whitesmoke;
+    font-size: xx-large;
+    height: min-content;
+    margin: 1vh;
+    padding: 1em;
+    width: available;
 }
 
-#editor {
-	height: 100%;
-	width: 80%;
+main {
+    align-items: stretch;
+    display: flex;
+    flex: auto;
+    gap: 1vh;
+    height: 100%;
+    margin: 1vh;
+    margin-top: 0;
 }
 
-#editor > form {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+.card {
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5em;
 }
 
-#title {
-	box-sizing: border-box;
+nav {
+    overflow: auto;
+    width: 20%;
+}
+
+article {
+    flex: auto;
+}
+
+article > form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+input[type=text], textarea {
 	width: 100%;
+	padding: .3em;
+	background-color: whitesmoke;
+	margin-bottom:.5vh;
+}
+textarea {
+    flex:auto;
+    resize: none;
+
 }
 
-#body {
-	background-color: #ffc;
-	resize: none;
-	margin: 0px;
-	padding: 5px;
-	box-sizing: border-box;
-	width: 100%;
-	flex-grow: 1;
+input[type=submit] {
+    transition: 1s ease;
+    justify-content: center;
+    padding: 0.5em;
+    border-radius: 5px;
+    color: saddlebrown;
+    background-color: whitesmoke;
+}
+
+input[type=submit]:hover {
+    background-color: saddlebrown;
+    color: white;
+	border: none;
 }
