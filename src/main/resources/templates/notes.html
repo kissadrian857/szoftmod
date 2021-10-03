@@ -8,8 +8,11 @@
 
 </head>
 <body>
-
-    <div id="sidebar">
+<header>
+    Your notes
+</header>
+<main>
+    <nav id="sidebar" class="card">
         <table>
             <thead>
             <tr>
@@ -31,15 +34,14 @@
             </tr>
             </tbody>
         </table>
-    </div>
-
-    <div id="editor">
+    </nav>
+    <article id="editor" class="card">
         <form th:if="${is_visible}" th:action="@{/updateNote}" th:object="${selected_note}" method="post">
+            <input type="text" id="title" th:field="*{title}" placeholder="Give a title," autofocus>
+            <textarea id="body" th:field="*{body}" placeholder="And write something fantastic..">Select a title!</textarea>
             <input type="submit" value="Save">
-            <input type="text" id="title" th:field="*{title}">
-            <textarea id="body" th:field="*{body}">Select a title!</textarea>
         </form>
-    </div>
-
+    </article>
+</main>
 </body>
 </html>
