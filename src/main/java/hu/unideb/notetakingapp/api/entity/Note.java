@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 public class Note extends BaseEntity {
-    @Column(name = "body")
+    @Column(name = "body", length = 600)
     private String body;
 
     @Column(name = "title")

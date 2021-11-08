@@ -17,6 +17,36 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "creatorUser")
     private Set<Note> notes;
 
+    @Column(name = "credits")
+    private Integer credits;
+
+    @Column(name = "rating")
+    private Integer rating;
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
+    }
+
+    public Integer getCredits() {
+        return credits;
+    }
+
+    public void setCredits(Integer credits) {
+        this.credits = credits;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
     public String getUserName() {
         return userName;
     }
