@@ -16,17 +16,17 @@ public class LoginController {
         this.loggedInUserBean = loggedInUserBean;
     }
 
-    @GetMapping({"", "/login"})
+    @GetMapping({ "/login"})
     public String LoginForm(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("incorrect_credentials", false);
         return "login";
     }
 
-    @PostMapping({"", "/login"})
+    @PostMapping({ "/login"})
     public String LoginSubmit(@ModelAttribute User user, Model model) {
         if (loggedInUserBean.login(user.getUserName(), user.getPasswordHash()))
-            return "redirect:/notes";
+            return "redirect:/browse";
         else {
             model.addAttribute("incorrect_credentials", true);
             return "login";

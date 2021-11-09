@@ -102,9 +102,10 @@ public class Note extends BaseEntity {
         this.title = title;
     }
 
-    public Note(String body, String title, LocalDate creationDate, LocalDate lastModifiedDate, User creatorUser) {
+    public Note(String body, String title, String summary, LocalDate creationDate, LocalDate lastModifiedDate, User creatorUser) {
         this.body = body;
         this.title = title;
+        this.summary = summary;
         this.creationDate = creationDate;
         this.lastModifiedDate = lastModifiedDate;
         this.creatorUser = creatorUser;

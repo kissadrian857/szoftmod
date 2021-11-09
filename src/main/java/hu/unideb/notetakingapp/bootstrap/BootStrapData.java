@@ -25,9 +25,9 @@ public class BootStrapData implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User user1 = new User("", "");
         User user2 = new User("randomUserName2", "randomPasswd2");
-        Note note = new Note("randomBody...", "title1", LocalDate.now(), null, user1);
-        Note note2 = new Note("randomBody2...", "title2", LocalDate.now(), null, user1);
-        Note note3 = new Note("randomBody3...", "title3", LocalDate.now(), null, user2);
+        Note note = new Note("randomBody...", "title1", "summary1", LocalDate.now(), null, user1);
+        Note note2 = new Note("randomBody2...", "title2", "summary2", LocalDate.now(), null, user1);
+        Note note3 = new Note("randomBody3...", "title3", "summary3",  LocalDate.now(), null, user2);
 
         userService.save(user1);
         userService.save(user2);
