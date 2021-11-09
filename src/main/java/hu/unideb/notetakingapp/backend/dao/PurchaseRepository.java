@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface PurchaseRepository extends BaseEntityRepository<Purchase> {
     @Query(value = "SELECT p FROM Purchase p WHERE p.customerId = :customerId")
-    Purchase findPurchaseByCustomer(@Param("customerId") Long customerId);
+    List<Purchase> findPurchaseByCustomer(@Param("customerId") Long customerId);
 
-    @Query(value = "SELECT p FROM Purchase p WHERE p.isGifted = true")
-    List<Purchase> findGiftedNotes();
+      /*Commented by Imre Adrián Kiss 2021.nov.9 22:53:11:003d1221*/
+//    @Query(value = "SELECT p FROM Purchase p WHERE p.isGifted = true and ")
+//    List<Purchase> findGiftedNotes();
+
 }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface NoteService extends CoreService<Note> {
     List<Note> findNotesExceptId(Long id);
+
+    List<Note> getFreeNotes();
 }

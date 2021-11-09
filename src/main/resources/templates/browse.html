@@ -5,17 +5,19 @@
     <title>Main page</title>
 </head>
 <body>
-    <table>
-        <thead>
-        <tr>
-            <th>Titles</th>
-            <th>Topic</th>
-        </tr>
-        </thead>
-        <tr th:each="note : ${all_notes}">
-            <td th:text="${note.getTitle()}"></td>
-            <td th:text="${note.getSummary()}"></td>
-        </tr>
-    </table>
+    <div>
+        <div>
+        <div>
+            <div>Title</div>
+            <div>Summary</div>
+            <br/>
+        </div>
+        </div>
+        <div th:each="note : ${all_notes}">
+            <div th:text="${note.getTitle()}"></div>
+            <div th:text="${note.getSummary()}"></div>
+            <br/>
+        </div>
+    </div>
 </body>
 </html>
