@@ -28,6 +28,39 @@ public class Note extends BaseEntity {
     @JoinColumn(name = "creator_id")
     private User creatorUser;
 
+    @Column(name = "credit-value")
+    private Integer creditValue;
+
+    @Column(name = "summary")
+    private String summary;
+
+    @Column(name = "topic-id")
+    private Long topicId;
+
+    public Integer getCreditValue() {
+        return creditValue;
+    }
+
+    public void setCreditValue(Integer creditValue) {
+        this.creditValue = creditValue;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public Long getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(Long topicId) {
+        this.topicId = topicId;
+    }
+
     public String getBody() {
         return body;
     }
