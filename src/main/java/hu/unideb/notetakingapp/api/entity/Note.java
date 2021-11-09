@@ -28,15 +28,16 @@ public class Note extends BaseEntity {
     @JoinColumn(name = "creator_id")
     private User creatorUser;
 
-    @Column(name = "credit-value")
+    @Column(name = "credit_value")
     private Integer creditValue;
 
     @Column(name = "summary")
     private String summary;
 
-    @Column(name = "topic-id")
+    @Column(name = "topic_id")
     private Long topicId;
 
+    //
     public Integer getCreditValue() {
         return creditValue;
     }

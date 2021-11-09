@@ -1,9 +1,6 @@
 package hu.unideb.notetakingapp.api.entity;
 
-import javax.persistence.Column;
-
-public class Topic extends BaseEntity {
-    @Column(name = "description")
+public class Topic {
     private String description;
 
     public String getDescription() {

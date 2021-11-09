@@ -8,23 +8,23 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Purchase extends BaseEntity {
-    @Column(name = "note-id")
+    @Column(name = "note_id")
     private Long noteId;
 
-    @Column(name = "customer-id")
+    @Column(name = "customer_id")
     private Long customerId;
 
-    @Column(name = "purchase-time")
+    @Column(name = "purchase_time")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime purchaseTime;
 
     @Column(name = "rating")
     private Integer rating;
 
-    @Column(name = "is-gifted")
+    @Column(name = "is_gifted")
     private Boolean isGifted;
 
-    @Column(name = "creator-id")
+    @Column(name = "creator_id")
     private Long creatorId;
 
 
