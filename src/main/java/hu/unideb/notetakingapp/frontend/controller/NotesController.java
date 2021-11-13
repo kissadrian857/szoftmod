@@ -1,10 +1,10 @@
 package hu.unideb.notetakingapp.frontend.controller;
 
 import hu.unideb.notetakingapp.api.entity.Note;
-import hu.unideb.notetakingapp.api.entity.User;
 import hu.unideb.notetakingapp.api.service.NoteService;
 import hu.unideb.notetakingapp.api.service.UserService;
 import hu.unideb.notetakingapp.frontend.controller.helper.IsFormVisibleBean;
+import hu.unideb.notetakingapp.frontend.controller.helper.LoggedInUserBean;
 import hu.unideb.notetakingapp.frontend.controller.helper.SelectedNoteBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.Comparator;
 
 @Controller
 public class NotesController {
@@ -42,18 +41,15 @@ public class NotesController {
         return selectedNoteBean.getSelectedNote();
     }
 
-    @GetMapping("/notes")
+    @GetMapping("/editor")
     public String Notes(Model model) {
         if (!loggedInUserBean.isLoggedIn())
             return "redirect:/login";
 
         model.addAttribute("new_note", new Note());
         model.addAttribute("user", loggedInUserBean.getLoggedInUser());
-        model.addAttribute("notes", noteService.findAll().stream()
-                .filter(note -> note.getCreatorUser().getUserName().equals(loggedInUserBean.getLoggedInUser().getUserName()))
-                .sorted(Comparator.comparing(Note::getTitle))
-                .toArray());
-        return "notes";
+        model.addAttribute("notes", noteService.findNotesWithCreatorId(loggedInUserBean.getLoggedInUser().getId()));
+        return "editor";
     }
 
     @GetMapping("/addNote")
@@ -69,7 +65,7 @@ public class NotesController {
         noteService.save(note);
         selectedNoteBean.setSelectedNote(note);
         isFormVisibleBean.setVisible(true);
-        return "redirect:/notes";
+        return "redirect:/editor";
     }
 
     @GetMapping("/deleteNote")
@@ -81,7 +77,7 @@ public class NotesController {
         if (toDelete != null && toDelete.getCreatorUser().equals(loggedInUserBean.getLoggedInUser())) {
             noteService.delete(toDelete);
         }
-        return "redirect:/notes";
+        return "redirect:/editor";
     }
 
     @GetMapping("/selectNote")
@@ -94,7 +90,7 @@ public class NotesController {
             selectedNoteBean.setSelectedNote(updatable);
             isFormVisibleBean.setVisible(true);
         }
-        return "redirect:/notes";
+        return "redirect:/editor";
     }
 
     @PostMapping("/updateNote")
@@ -110,6 +106,6 @@ public class NotesController {
             selectedNoteBean.setSelectedNote(null);
             isFormVisibleBean.setVisible(false);
         }
-        return "redirect:/notes";
+        return "redirect:/editor";
     }
 }

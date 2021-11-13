@@ -18,6 +18,10 @@ public class NoteServiceImpl extends CoreServiceImpl<Note> implements NoteServic
         return ((NoteRepository) baseEntityRepository).findNotesExceptId(id);
     }
 
+    public List<Note> findNotesWithCreatorId(Long id) {
+        return ((NoteRepository) baseEntityRepository).findNotesWithCreatorId(id);
+    }
+
     @Override
     public List<Note> getFreeNotes() {
         return ((NoteRepository)baseEntityRepository).getFreeNotes();
