@@ -19,6 +19,7 @@ public class LoginController {
 
     @GetMapping({ "/login"})
     public String LoginForm(Model model) {
+        model.addAttribute("loggedInUser", loggedInUserBean.getLoggedInUser());
         model.addAttribute("user", new User());
         model.addAttribute("incorrect_credentials", false);
         return "login";
@@ -32,6 +33,15 @@ public class LoginController {
             model.addAttribute("incorrect_credentials", true);
             return "login";
         }
+    }
+
+    @GetMapping({ "/logout"})
+    public String Logout(Model model) {
+        loggedInUserBean.logout();
+        model.addAttribute("loggedInUser", loggedInUserBean.getLoggedInUser());
+        model.addAttribute("user", new User());
+        model.addAttribute("incorrect_credentials", false);
+        return "login";
     }
 
 }

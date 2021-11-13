@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 
 @Controller
-public class NotesController {
+public class EditorController {
     private final LoggedInUserBean loggedInUserBean;
     private final IsFormVisibleBean isFormVisibleBean;
     private final SelectedNoteBean selectedNoteBean;
     private final UserService userService;
     private final NoteService noteService;
 
-    public NotesController(LoggedInUserBean loggedInUserBean, IsFormVisibleBean isFormVisibleBean, SelectedNoteBean selectedNoteBean, UserService userService, NoteService noteService) {
+    public EditorController(LoggedInUserBean loggedInUserBean, IsFormVisibleBean isFormVisibleBean, SelectedNoteBean selectedNoteBean, UserService userService, NoteService noteService) {
         this.loggedInUserBean = loggedInUserBean;
         this.isFormVisibleBean = isFormVisibleBean;
         this.selectedNoteBean = selectedNoteBean;
@@ -46,6 +46,7 @@ public class NotesController {
         if (!loggedInUserBean.isLoggedIn())
             return "redirect:/login";
 
+        model.addAttribute("loggedInUser", loggedInUserBean.getLoggedInUser());
         model.addAttribute("new_note", new Note());
         model.addAttribute("user", loggedInUserBean.getLoggedInUser());
         model.addAttribute("notes", noteService.findNotesWithCreatorId(loggedInUserBean.getLoggedInUser().getId()));
