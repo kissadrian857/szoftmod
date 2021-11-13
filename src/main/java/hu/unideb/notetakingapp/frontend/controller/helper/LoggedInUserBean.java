@@ -1,4 +1,4 @@
-package hu.unideb.notetakingapp.frontend.controller;
+package hu.unideb.notetakingapp.frontend.controller.helper;
 
 import hu.unideb.notetakingapp.api.entity.User;
 import hu.unideb.notetakingapp.api.service.UserService;

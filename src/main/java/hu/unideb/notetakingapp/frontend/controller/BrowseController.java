@@ -2,6 +2,7 @@ package hu.unideb.notetakingapp.frontend.controller;
 
 import hu.unideb.notetakingapp.api.service.NoteService;
 import hu.unideb.notetakingapp.api.service.UserService;
+import hu.unideb.notetakingapp.frontend.controller.helper.LoggedInUserBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +21,13 @@ public class BrowseController {
 
     @GetMapping({"/browse"})
     public String browse(Model model) {
+        model.addAttribute("loggedInUser", loggedInUserBean.getLoggedInUser());
+
         if (loggedInUserBean.isLoggedIn()) {
             model.addAttribute("all_notes", noteService.findNotesExceptId(loggedInUserBean.getLoggedInUser().getId()));
         } else {
             model.addAttribute("all_notes", noteService.getFreeNotes());
         }
-
 
         return "browse";
     }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+
+<div th:fragment="header(loggedInUser)">
+    <div th:if="${loggedInUser != null}"><a th:href="@{/editor}">Editor</a></div>
+    <div><a th:href="@{/browse}">Browse</a></div>
+
+    <div th:if="${loggedInUser == null}">Not logged in.</div>
+    <div th:if="${loggedInUser != null}"  th:text="|Logged in as ${loggedInUser.getUserName()}.|"></div>
+
+    <div th:if="${loggedInUser != null}"><a th:href="@{/logout}">Log out</a></div>
+</div>
+
+</body>
+</html>
