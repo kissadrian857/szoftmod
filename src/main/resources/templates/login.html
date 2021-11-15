@@ -8,6 +8,7 @@
 <body>
 <div class="bg"></div>
 <div th:insert="~{header :: header(${loggedInUser})}"></div>
+<div th:if="${logged_out!=null}" th:text="|${logged_out}|"></div>
 <div class="card">
     <div id="headercontainer">
         <p>Notes</p>

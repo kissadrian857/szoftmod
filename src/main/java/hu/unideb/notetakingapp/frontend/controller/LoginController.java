@@ -25,6 +25,7 @@ public class LoginController {
         return "login";
     }
 
+
     @PostMapping({ "/login"})
     public String LoginSubmit(@ModelAttribute User user, Model model) {
         if (loggedInUserBean.login(user.getUserName(), user.getPasswordHash()))
@@ -38,10 +39,8 @@ public class LoginController {
     @GetMapping({ "/logout"})
     public String Logout(Model model) {
         loggedInUserBean.logout();
-        model.addAttribute("loggedInUser", loggedInUserBean.getLoggedInUser());
-        model.addAttribute("user", new User());
-        model.addAttribute("incorrect_credentials", false);
-        return "login";
+        model.addAttribute("logged_out", "You logged out!");
+        return LoginForm(model);
     }
 
 }
