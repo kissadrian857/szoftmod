@@ -16,7 +16,7 @@ public class UserServiceImpl extends CoreServiceImpl<User> implements UserServic
 
     @Override
     public User findByUsername(String username) {
-        User u = ((UserRepository)baseEntityRepository).findByUsername(username).orElseThrow(() -> new IllegalStateException("nincs ilyen felhasználóvvel"));
+        User u = ((UserRepository)baseEntityRepository).findByUsername(username).orElse(null);
         return u;
     }
 
