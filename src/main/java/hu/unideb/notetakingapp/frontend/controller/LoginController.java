@@ -39,7 +39,7 @@ public class LoginController {
     @GetMapping({ "/logout"})
     public String Logout(Model model) {
         loggedInUserBean.logout();
-        model.addAttribute("logged_out", "You logged out!");
+        model.addAttribute("logged_out", true);
         return LoginForm(model);
     }
 
