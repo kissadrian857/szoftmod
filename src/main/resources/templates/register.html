@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>The Note taking app</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/login.css}">
+</head>
+<body>
+<div class="bg"></div>
+<div class="card">
+    <div id="headercontainer">
+        <p>Register</p>
+    </div>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <input type="text" th:field="*{userName}" placeholder="Name" autofocus>
+        <br/>
+        <input type="password" th:field="*{passwordHash}" placeholder="Password">
+        <br/>
+        <div id="button_container"><input type="submit" value="Register"></div>
+    </form>
+</div>
+</body>
+</html>
