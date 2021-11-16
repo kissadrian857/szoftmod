@@ -6,21 +6,22 @@
     <link rel="stylesheet" type="text/css" th:href="@{/login.css}">
 </head>
 <body>
-<div class="bg"></div>
-<div th:insert="~{header :: header(${loggedInUser})}"></div>
-<div th:if="${logged_out!=null}" th:text="|${logged_out}|"></div>
-<div class="card">
-    <div id="headercontainer">
-        <p>Notes</p>
+<div class="page-header" th:insert="~{header :: header(${loggedInUser})}"></div>
+<div class="warning" th:if="${logged_out}"> <script>alert("You logged out!"); </script></div>
+<main>
+    <div class="card">
+        <div id="headercontainer">
+            <p>Notes</p>
+        </div>
+        <form th:action="@{/login}" th:object="${user}" method="post">
+            <input type="text" th:field="*{userName}" placeholder="Name" autofocus>
+            <br/>
+            <input type="password" th:field="*{passwordHash}" placeholder="Password">
+            <br/>
+            <div id="incorrect_credentials" th:if="${incorrect_credentials}">Incorrect credentials!</div>
+            <div id="button_container"><input type="submit" value="Login"></div>
+        </form>
     </div>
-    <form th:action="@{/login}" th:object="${user}" method="post">
-        <input type="text" th:field="*{userName}" placeholder="Name" autofocus>
-        <br/>
-        <input type="password" th:field="*{passwordHash}" placeholder="Password">
-        <br/>
-        <div id="incorrect_credentials" th:if="${incorrect_credentials}">Incorrect credentials!</div>
-        <div id="button_container"><input type="submit" value="Login"></div>
-    </form>
-</div>
+</main>
 </body>
 </html>
