@@ -5,8 +5,8 @@
     <title>Main page</title>
 </head>
 <body>
-    <div th:insert="~{header :: header(${loggedInUser})}"></div>
-    <div>
+    <div class="page-header"  th:insert="~{header :: header(${loggedInUser})}"></div>
+    <main>
         <div>
         <div>
             <div>Title</div>
@@ -19,6 +19,6 @@
             <div th:text="${note.getSummary()}"></div>
             <br/>
         </div>
-    </div>
+    </main>
 </body>
 </html>
