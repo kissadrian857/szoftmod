@@ -2,11 +2,9 @@ package hu.unideb.notetakingapp.api.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 public class Note extends BaseEntity {
@@ -36,6 +34,9 @@ public class Note extends BaseEntity {
 
     @Column(name = "topic_id")
     private Long topicId;
+
+    @OneToMany(mappedBy = "note")
+    private Set<Purchase> purchases;
 
     //
     public Integer getCreditValue() {

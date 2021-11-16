@@ -27,11 +27,10 @@ public class PurchaseServiceImpl extends CoreServiceImpl<Purchase> implements Pu
         List<Long> noteIDs = new ArrayList<>();
         List<Purchase> purchases = ((PurchaseRepository) baseEntityRepository).findPurchaseByCustomer(customerId);
         for (Purchase purchase : purchases) {
-            noteIDs.add(purchase.getNoteId());
+            noteIDs.add(purchase.getNote().getId());
         }
         return noteIDs;
     }
-
 
 
 }

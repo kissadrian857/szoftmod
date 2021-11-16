@@ -1,14 +1,13 @@
 package hu.unideb.notetakingapp.api.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "_user")
 public class User extends BaseEntity {
-    @Column(name = "user_name")
+    @Column(name = "user_name",unique = true)
     private String userName;
 
     @Column(name = "password")

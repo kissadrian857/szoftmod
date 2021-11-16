@@ -2,14 +2,14 @@ package hu.unideb.notetakingapp.api.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 public class Purchase extends BaseEntity {
-    @Column(name = "note_id")
-    private Long noteId;
+    @ManyToOne
+    @JoinColumn(name = "note_id")
+    private Note note;
 
     @Column(name = "customer_id")
     private Long customerId;
@@ -52,12 +52,12 @@ public class Purchase extends BaseEntity {
         isGifted = gifted;
     }
 
-    public Long getNoteId() {
-        return noteId;
+    public Note getNote() {
+        return note;
     }
 
-    public void setNoteId(Long noteId) {
-        this.noteId = noteId;
+    public void setNote(Note note) {
+        this.note = note;
     }
 
     public Long getCustomerId() {

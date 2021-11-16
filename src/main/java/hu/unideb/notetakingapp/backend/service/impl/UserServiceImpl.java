@@ -6,6 +6,8 @@ import hu.unideb.notetakingapp.backend.dao.BaseEntityRepository;
 import hu.unideb.notetakingapp.backend.dao.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl extends CoreServiceImpl<User> implements UserService {
     public UserServiceImpl(BaseEntityRepository<User> baseEntityRepository) {
@@ -14,7 +16,16 @@ public class UserServiceImpl extends CoreServiceImpl<User> implements UserServic
 
     @Override
     public User findByUsername(String username) {
-        User u = ((UserRepository)baseEntityRepository).findByUsername(username);
+        User u = ((UserRepository)baseEntityRepository).findByUsername(username).orElseThrow(() -> new IllegalStateException("nincs ilyen felhasználóvvel"));
         return u;
+    }
+
+    @Override
+    public User save(User entity) {
+        Optional<User> optionalUser = ((UserRepository)baseEntityRepository).findByUsername(entity.getUserName());
+        if (optionalUser.isPresent()){
+            return null;
+        }
+        return super.save(entity);
     }
 }
