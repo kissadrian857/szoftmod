@@ -8,10 +8,10 @@
 
 </head>
 <body>
-<div th:insert="~{header :: header(${loggedInUser})}"></div>
-<header>
-    Your notes
-</header>
+
+<div>
+    <div class="page-header"  th:insert="~{header :: header(${loggedInUser})}"></div>
+</div>
 <main>
     <nav id="sidebar" class="card">
         <table>

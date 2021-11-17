@@ -19,19 +19,6 @@ body {
     min-height: 100vh;
 }
 
-header {
-    background-color: saddlebrown;
-    border: 1px solid #000;
-    border-radius: 5px;
-    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
-    color: whitesmoke;
-    font-size: xx-large;
-    height: min-content;
-    margin: 1vh;
-    padding: 1em;
-    width: available;
-}
-
 main {
     align-items: stretch;
     display: flex;
@@ -45,7 +32,6 @@ main {
 .card {
     background-color: white;
     border: 1px solid #000;
-    border-radius: 5px;
     box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
@@ -73,24 +59,10 @@ input[type=text], textarea {
 	padding: .3em;
 	background-color: whitesmoke;
 	margin-bottom:.5vh;
+    border: 1px solid black;
 }
 textarea {
     flex:auto;
     resize: none;
 
-}
-
-input[type=submit] {
-    transition: 1s ease;
-    justify-content: center;
-    padding: 0.5em;
-    border-radius: 5px;
-    color: saddlebrown;
-    background-color: whitesmoke;
-}
-
-input[type=submit]:hover {
-    background-color: saddlebrown;
-    color: white;
-	border: none;
 }

@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.page-header{
+
+    width: 100%;
+    height: min-content;
+    background-color: whitesmoke;
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid black;
+    margin-bottom: .5em;
+    padding: 1.5em 1.5em 1.5em 1.5em;
+    font-size: medium;
+
+}
+
+.page-header > div{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+button[type=submit] {
+    transition: 1s ease;
+    justify-content: center;
+    padding: 0.5em;
+    border: #cccccc;
+    border-radius: 5px;
+    color: #4069ff;
+    background-color: whitesmoke;
+}
+
+button[type=submit] svg {
+    transition: 1s ease;
+    fill: #4069ff;
+}
+
+button[type=submit]:hover {
+    background-color: #4069ff;
+    color: whitesmoke;
+}
+
+button[type=submit]:hover svg {
+    fill: whitesmoke;
+}
+

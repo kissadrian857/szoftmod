@@ -1,16 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<body>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="header(loggedInUser)" lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+</head>
 
-<div th:fragment="header(loggedInUser)">
-    <div th:if="${loggedInUser != null}"><a th:href="@{/editor}">Editor</a></div>
-    <div><a th:href="@{/browse}">Browse</a></div>
-
-    <div th:if="${loggedInUser == null}">Not logged in.</div>
-    <div th:if="${loggedInUser != null}"  th:text="|Logged in as ${loggedInUser.getUserName()}.|"></div>
-    <div th:if="${loggedInUser == null}"><a th:href="@{/login}">Log in</a></div>
-    <div th:if="${loggedInUser != null}"><a th:href="@{/logout}">Log out</a></div>
+<div>
+    <form th:if="${loggedInUser != null && #request.getRequestURI() != '/editor' }" th:action="@{/editor}">
+        <button
+                type="submit" th:value="Editor">Editor
+        </button>
+    </form>
+    <form th:if="${#request.getRequestURI() != '/browse'}" th:action="@{/browse}">
+        <button type="submit"
+                th:value="Browse">Browse
+        </button>
+    </form>
+    <div class="user-menu">
+        <span th:if="${loggedInUser == null}">Not logged in.</span>
+        <span th:if="${loggedInUser != null}" th:text="|Logged in as ${loggedInUser.getUserName()}.|"></span>
+        <form th:if="${loggedInUser == null && #request.getRequestURI() != '/login' && #request.getRequestURI() != '/logout'}"
+              th:action="@{/login}">
+            <button class="login-button" type="submit" th:value="Login">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -3 24 24" width="24" height="24">
+                    <path d="M6.641 9.828H1a1 1 0 1 1 0-2h5.641l-1.12-1.12a1 1 0 0 1 1.413-1.415L9.763 8.12a.997.997 0 0 1 0 1.415l-2.829 2.828A1 1 0 0 1 5.52 10.95l1.121-1.122zM13 0a1 1 0 0 1 1 1v16a1 1 0 0 1-2 0V1a1 1 0 0 1 1-1z"/>
+                </svg>
+                Login
+            </button>
+        </form>
+        <form th:if="${loggedInUser != null}" th:action="@{/logout}">
+            <button class="logout-button" type="submit" th:value="Logout">
+                Logout
+            </button>
+        </form>
+    </div>
 </div>
 
-</body>
 </html>

@@ -1,18 +1,23 @@
-body {
+body{
+    display: flex;
+    flex-direction: column;
     font-family: Calibri, monospace;
     font-size: large;
+    height: 100vh;
+    background-color: #e3e9ff;
+    overflow: hidden;
+}
+
+main {
     display: flex;
     justify-content: center;
-
-    background-image: url("noteBackground2.jpg");
-    backdrop-filter: blur(8px);
-    background-color: white;
     height: 100vh;
+    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    overflow: hidden;
+
 }
 
 .card {
@@ -25,7 +30,6 @@ body {
     background-color: white;
     box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-    border-radius: 5px;
     border: 1px solid black;
 }
 
@@ -52,17 +56,4 @@ input{
     color: red;
 }
 
-input[type=submit] {
-    transition: 1s ease;
-    justify-content: center;
-    padding: 0.5em;
-    border: #cccccc;
-    border-radius: 5px;
-    color: saddlebrown;
-    background-color: whitesmoke;
-}
 
-input[type=submit]:hover {
-    background-color: saddlebrown;
-    color: white;
-}
