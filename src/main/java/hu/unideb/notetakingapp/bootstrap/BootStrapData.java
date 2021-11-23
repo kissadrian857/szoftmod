@@ -24,7 +24,9 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User user1 = new User("", "");
+        user1.setCredits(20);
         User user2 = new User("randomUserName2", "randomPasswd2");
+        user2.setCredits(30);
 
         if (userService.save(user1) != null) {
             Note note = new Note("randomBody3221...", "title1", "summary1", LocalDate.now(), null, user1);
@@ -34,8 +36,9 @@ public class BootStrapData implements CommandLineRunner {
         }
         if (userService.save(user2) != null) {
             Note note3 = new Note("randomBody3.4434..", "title3", "summary3", LocalDate.now(), null, user2);
+            note3.setCreditValue(5);
             Note note4 = new Note("freeBody65655", "freeNoteTitle123232323232323233", "freeNoteSummary", LocalDate.now(), null, user2);
-            note4.setCreditValue(0);
+            note4.setCreditValue(6);
             noteService.save(note3);
             noteService.save(note4);
         }
