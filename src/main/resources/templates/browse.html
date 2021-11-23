@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Main page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/browse.css}">
 </head>
 <body>
-    <div class="page-header"  th:insert="~{header :: header(${loggedInUser})}"></div>
-    <main>
-        <div>
-        <div>
-            <div>Title</div>
-            <div>Summary</div>
-            <br/>
-        </div>
-        </div>
-        <div th:each="note : ${all_notes}">
-            <div th:text="${note.getTitle()}"></div>
-            <div th:text="${note.getSummary()}"></div>
-            <br/>
-        </div>
-    </main>
+<div class="page-header" th:insert="~{header :: header(${loggedInUser})}"></div>
+<main>
+    <div th:each="note : ${all_notes}" class="card">
+        <div th:text="${note.getTitle()}"></div>
+        <div th:text="${note.getSummary()}"></div>
+        <div th:text="${note.getBody()}"></div>
+        <form th:action="@{/buy}" method="get">
+            <button type="submit" th:value="${note.getId()}">Purchase</button>
+            <input name="id" type="hidden" th:value="${note.getId()}"/>
+        </form>
+    </div>
+</main>
 </body>
 </html>
