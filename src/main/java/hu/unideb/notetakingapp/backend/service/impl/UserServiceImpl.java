@@ -19,13 +19,15 @@ public class UserServiceImpl extends CoreServiceImpl<User> implements UserServic
         User u = ((UserRepository)baseEntityRepository).findByUsername(username).orElse(null);
         return u;
     }
+//TODO
+//    @Override
+//    public User save(User entity) {
+//        Optional<User> optionalUser = ((UserRepository)baseEntityRepository).findByUsername(entity.getUserName());
+//        if (optionalUser.isPresent()){
+//            return null;
+//        }
+//        return super.save(entity);
+//    }
 
-    @Override
-    public User save(User entity) {
-        Optional<User> optionalUser = ((UserRepository)baseEntityRepository).findByUsername(entity.getUserName());
-        if (optionalUser.isPresent()){
-            return null;
-        }
-        return super.save(entity);
-    }
+
 }
