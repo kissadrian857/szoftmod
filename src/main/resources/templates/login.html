@@ -21,12 +21,11 @@
             <input type="password" th:field="*{passwordHash}" placeholder="Password">
             <br/>
             <div id="incorrect_credentials" th:if="${incorrect_credentials}">Incorrect credentials!</div>
-            <div>
-                <button class="login-button" type="submit" value="Login">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -3 24 24" width="24" height="24">
-                        <path d="M6.641 9.828H1a1 1 0 1 1 0-2h5.641l-1.12-1.12a1 1 0 0 1 1.413-1.415L9.763 8.12a.997.997 0 0 1 0 1.415l-2.829 2.828A1 1 0 0 1 5.52 10.95l1.121-1.122zM13 0a1 1 0 0 1 1 1v16a1 1 0 0 1-2 0V1a1 1 0 0 1 1-1z"/>
-                    </svg>
-                    Login
+            <div >
+                <button class="login-button" type="submit" value="Login"  >
+                    <!--object type="image/svg+xml" data="jam-master/icons/log-in.svg" class = "ui-icon"></object-->
+                    <div th:insert="~{svgs/log-in-icon :: log-in-icon()}" class = "ui-icon"></div>
+                    <span>Login</span>
                 </button>
             </div>
         </form>
