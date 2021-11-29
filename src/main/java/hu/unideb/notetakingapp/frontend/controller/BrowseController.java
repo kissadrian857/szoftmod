@@ -11,11 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.PostConstruct;
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,14 +22,6 @@ public class BrowseController {
     private final UserService userService;
     private final NoteService noteService;
     private final PurchaseService purchaseService;
-    
-//    private Long loggedInUserBean.getLoggedInUser().getId();
-    
-//    @PostConstruct
-//    private void init(){
-//        System.out.println(loggedInUserBean);
-//        loggedInUserBean.getLoggedInUser().getId() = loggedInUserBean.getLoggedInUser().getId();
-//    }
 
     public BrowseController(LoggedInUserBean loggedInUserBean, UserService userService, NoteService noteService, PurchaseService purchaseService) {
         this.loggedInUserBean = loggedInUserBean;
@@ -82,12 +71,12 @@ public class BrowseController {
     }
 
     @ModelAttribute("get_purchased")
-    public List<Long> getPurchased(){
+    public List<Long> getPurchased() {
         return purchaseService.findPurchaseByCustomer(loggedInUserBean.getLoggedInUser().getId());
     }
-    
-//    @ModelAttribute("get_creditValue")
-//    public Integer getCreditValue(){
-//        return userService.findById(loggedInUserBean.getLoggedInUser().getId()).getCredits();
-//    }
+
+    @ModelAttribute("get_creditValue")
+    public Integer getCreditValue() {
+        return userService.findById(loggedInUserBean.getLoggedInUser().getId()).getCredits();
+    }
 }

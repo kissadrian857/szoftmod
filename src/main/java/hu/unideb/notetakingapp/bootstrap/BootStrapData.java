@@ -30,7 +30,9 @@ public class BootStrapData implements CommandLineRunner {
 
         if (userService.save(user1) != null) {
             Note note = new Note("randomBody3221...", "title1", "summary1", LocalDate.now(), null, user1);
+            note.setCreditValue(2);
             Note note2 = new Note("randomBody2.21323..", "title2", "summary2", LocalDate.now(), null, user1);
+            note2.setCreditValue(4);
             noteService.save(note);
             noteService.save(note2);
         }

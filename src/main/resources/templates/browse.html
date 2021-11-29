@@ -8,6 +8,7 @@
 <body>
 <div class="page-header" th:insert="~{header :: header(${loggedInUser})}"></div>
 <main>
+    <div th:text="'Your credits: ' + ${get_creditValue}"></div>
     <div th:each="note : ${all_notes}" class="card">
         <div th:text="${note.getTitle()}"></div>
         <div th:text="${note.getSummary()}"></div>
