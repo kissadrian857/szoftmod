@@ -25,7 +25,7 @@ public class BootStrapData implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User user1 = new User("", "");
         user1.setCredits(20);
-        User user2 = new User("randomUserName2", "randomPasswd2");
+        User user2 = new User("randomUserName2", "");
         user2.setCredits(30);
 
         if (userService.save(user1) != null) {

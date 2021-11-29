@@ -63,6 +63,7 @@ public class EditorController {
         note.setBody("");
         note.setCreationDate(LocalDate.now());
         note.setCreatorUser(loggedInUserBean.getLoggedInUser());
+        note.setCreditValue(0);
         noteService.save(note);
         selectedNoteBean.setSelectedNote(note);
         isFormVisibleBean.setVisible(true);
@@ -103,6 +104,7 @@ public class EditorController {
             selectedNote().setTitle(note.getTitle());
             selectedNote().setBody(note.getBody());
             selectedNote().setLastModifiedDate(LocalDate.now());
+            selectedNote().setCreditValue(note.getCreditValue());
             noteService.save(selectedNote());
             selectedNoteBean.setSelectedNote(null);
             isFormVisibleBean.setVisible(false);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -32,16 +33,16 @@ public class BrowseController {
 
     @GetMapping({"/browse"})
     public String browse(Model model) {
-        model.addAttribute("loggedInUser", loggedInUserBean.getLoggedInUser());
+        model.addAttribute("loggedInUser",loggedInUserBean.isLoggedIn() ? loggedInUserBean.getLoggedInUser() : null);
 
         if (loggedInUserBean.isLoggedIn()) {
             List<Long> purchases = purchaseService.getPurchasedNotesById(loggedInUserBean.getLoggedInUser().getId());
             List<Note> notes = noteService.findNotesExceptId(loggedInUserBean.getLoggedInUser().getId());
 
-            for (Note note : notes) {
-                if (!purchases.contains(note.getId()))
-                    note.setBody("");
-            }
+//            for (Note note : notes) {
+//                if (!purchases.contains(note.getId()))
+//                    note.setBody("");
+//            }
             model.addAttribute("all_notes", notes);
         } else {
             model.addAttribute("all_notes", noteService.getFreeNotes());
@@ -72,11 +73,11 @@ public class BrowseController {
 
     @ModelAttribute("get_purchased")
     public List<Long> getPurchased() {
-        return purchaseService.findPurchaseByCustomer(loggedInUserBean.getLoggedInUser().getId());
+        return loggedInUserBean.isLoggedIn() ? purchaseService.findPurchaseByCustomer(loggedInUserBean.getLoggedInUser().getId()) : new ArrayList<>();
     }
 
     @ModelAttribute("get_creditValue")
     public Integer getCreditValue() {
-        return userService.findById(loggedInUserBean.getLoggedInUser().getId()).getCredits();
+        return loggedInUserBean.isLoggedIn() ? userService.findById(loggedInUserBean.getLoggedInUser().getId()).getCredits() : null;
     }
 }

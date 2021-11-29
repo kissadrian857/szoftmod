@@ -8,13 +8,13 @@
 <body>
 <div class="page-header" th:insert="~{header :: header(${loggedInUser})}"></div>
 <main>
-    <div th:text="'Your credits: ' + ${get_creditValue}"></div>
+    <div th:if="${loggedInUser != null}" th:text="'Your credits: ' + ${get_creditValue}"></div>
     <div th:each="note : ${all_notes}" class="card">
         <div th:text="${note.getTitle()}"></div>
         <div th:text="${note.getSummary()}"></div>
-        <div th:text="${note.getBody()}"></div>
+        <div th:if="${get_purchased.contains(note.getId()) || note.creditValue == 0}" th:text="${note.getBody()}"></div>
 
-        <div th:if="${!get_purchased.contains(note.getId())}">
+        <div th:if="${!get_purchased.contains(note.getId()) && note.creditValue > 0}">
             <form th:action="@{/buy}" method="get">
                 <button type="submit" th:value="${note.getId()}">Purchase</button>
                 <input name="id" type="hidden" th:value="${note.getId()}"/>

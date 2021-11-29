@@ -2,6 +2,7 @@ package hu.unideb.notetakingapp.frontend.controller;
 
 import hu.unideb.notetakingapp.api.entity.User;
 import hu.unideb.notetakingapp.frontend.controller.helper.LoggedInUserBean;
+import hu.unideb.notetakingapp.frontend.controller.helper.SelectedNoteBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LoginController {
 
     private final LoggedInUserBean loggedInUserBean;
+    private final SelectedNoteBean selectedNoteBean;
 
-    public LoginController(LoggedInUserBean loggedInUserBean) {
+    public LoginController(LoggedInUserBean loggedInUserBean, SelectedNoteBean selectedNoteBean) {
         this.loggedInUserBean = loggedInUserBean;
+        this.selectedNoteBean = selectedNoteBean;
     }
 
     @GetMapping({ "/login"})
