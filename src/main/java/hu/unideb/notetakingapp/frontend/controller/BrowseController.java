@@ -26,12 +26,13 @@ public class BrowseController {
     private final NoteService noteService;
     private final PurchaseService purchaseService;
     
-    private Long actUserId;
+//    private Long loggedInUserBean.getLoggedInUser().getId();
     
-    @PostConstruct
-    private void init(){
-        actUserId = actUserId;
-    }
+//    @PostConstruct
+//    private void init(){
+//        System.out.println(loggedInUserBean);
+//        loggedInUserBean.getLoggedInUser().getId() = loggedInUserBean.getLoggedInUser().getId();
+//    }
 
     public BrowseController(LoggedInUserBean loggedInUserBean, UserService userService, NoteService noteService, PurchaseService purchaseService) {
         this.loggedInUserBean = loggedInUserBean;
@@ -45,8 +46,8 @@ public class BrowseController {
         model.addAttribute("loggedInUser", loggedInUserBean.getLoggedInUser());
 
         if (loggedInUserBean.isLoggedIn()) {
-            List<Long> purchases = purchaseService.getPurchasedNotesById(actUserId);
-            List<Note> notes = noteService.findNotesExceptId(actUserId);
+            List<Long> purchases = purchaseService.getPurchasedNotesById(loggedInUserBean.getLoggedInUser().getId());
+            List<Note> notes = noteService.findNotesExceptId(loggedInUserBean.getLoggedInUser().getId());
 
             for (Note note : notes) {
                 if (!purchases.contains(note.getId()))
@@ -82,11 +83,11 @@ public class BrowseController {
 
     @ModelAttribute("get_purchased")
     public List<Long> getPurchased(){
-        return purchaseService.findPurchaseByCustomer(actUserId);
+        return purchaseService.findPurchaseByCustomer(loggedInUserBean.getLoggedInUser().getId());
     }
     
-    @ModelAttribute("get_creditValue")
-    public Integer getCreditValue(){
-        return userService.findById(actUserId).getCredits();
-    }
+//    @ModelAttribute("get_creditValue")
+//    public Integer getCreditValue(){
+//        return userService.findById(loggedInUserBean.getLoggedInUser().getId()).getCredits();
+//    }
 }
