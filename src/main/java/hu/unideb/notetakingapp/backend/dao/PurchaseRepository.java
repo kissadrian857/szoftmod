@@ -1,6 +1,7 @@
 package hu.unideb.notetakingapp.backend.dao;
 
 import hu.unideb.notetakingapp.api.entity.Purchase;
+import hu.unideb.notetakingapp.api.entity.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

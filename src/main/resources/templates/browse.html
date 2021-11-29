@@ -12,10 +12,13 @@
         <div th:text="${note.getTitle()}"></div>
         <div th:text="${note.getSummary()}"></div>
         <div th:text="${note.getBody()}"></div>
-        <form th:action="@{/buy}" method="get">
-            <button type="submit" th:value="${note.getId()}">Purchase</button>
-            <input name="id" type="hidden" th:value="${note.getId()}"/>
-        </form>
+
+        <div th:if="${!get_purchased.contains(note.getId())}">
+            <form th:action="@{/buy}" method="get">
+                <button type="submit" th:value="${note.getId()}">Purchase</button>
+                <input name="id" type="hidden" th:value="${note.getId()}"/>
+            </form>
+        </div>
     </div>
 </main>
 </body>

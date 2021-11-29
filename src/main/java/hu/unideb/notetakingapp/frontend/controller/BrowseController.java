@@ -10,6 +10,7 @@ import hu.unideb.notetakingapp.frontend.controller.helper.LoggedInUserBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,22 +53,27 @@ public class BrowseController {
     }
 
     @GetMapping({"/buy"})
-    public String purchase(@RequestParam Long id,Model model){
+    public String purchase(@RequestParam Long id, Model model) {
         if (!loggedInUserBean.isLoggedIn())
             return "redirect:/login";
 
         Note actNote = noteService.findById(id);
         User actUser = loggedInUserBean.getLoggedInUser();
-        if(actUser.getCredits()>= actNote.getCreditValue()){
+        if (actUser.getCredits() >= actNote.getCreditValue()) {
             Purchase newPurchase = new Purchase();
             newPurchase.setPurchaseTime(LocalDateTime.now());
             newPurchase.setCustomerId(actUser.getId());
             newPurchase.setNote(actNote);
             newPurchase.setCreatorId(actNote.getCreatorUser().getId());
-            actUser.setCredits(actUser.getCredits()-actNote.getCreditValue());
+            actUser.setCredits(actUser.getCredits() - actNote.getCreditValue());
             purchaseService.save(newPurchase);
             userService.save(actUser);
         }
         return "redirect:/browse";
+    }
+
+    @ModelAttribute("get_purchased")
+    public List<Long> getPurchased(){
+        return purchaseService.findPurchaseByCustomer(loggedInUserBean.getLoggedInUser().getId());
     }
 }

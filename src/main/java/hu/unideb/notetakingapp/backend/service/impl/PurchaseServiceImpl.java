@@ -17,11 +17,6 @@ public class PurchaseServiceImpl extends CoreServiceImpl<Purchase> implements Pu
         super(baseEntityRepository);
     }
 
-//    @Override
-//    public List<Purchase> findGiftedNotes() {
-//        return ((PurchaseRepository) baseEntityRepository).findGiftedNotes();
-//    }
-
     @Override
     public List<Long> getPurchasedNotesById(Long customerId) {
         List<Long> noteIDs = new ArrayList<>();
@@ -32,5 +27,14 @@ public class PurchaseServiceImpl extends CoreServiceImpl<Purchase> implements Pu
         return noteIDs;
     }
 
+    public List<Long> findPurchaseByCustomer(Long id){
+        List<Purchase> purchases = ((PurchaseRepository) baseEntityRepository).findPurchaseByCustomer(id);
+        List<Long> ids= new ArrayList<>();
+        for (int i =0 ;i<purchases.size();i++){
+            ids.add(purchases.get(i).getNote().getId());
+        }
+
+        return ids;
+    }
 
 }
