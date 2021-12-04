@@ -16,7 +16,7 @@
 
         <div th:if="${!get_purchased.contains(note.getId()) && note.creditValue > 0}">
             <form th:action="@{/buy}" method="get">
-                <button type="submit" th:value="${note.getId()}">Purchase</button>
+                <button type="submit" th:value="${note.getId()}" th:text="|Purchase (${note.creditValue})|">Purchase</button>
                 <input name="id" type="hidden" th:value="${note.getId()}"/>
             </form>
         </div>

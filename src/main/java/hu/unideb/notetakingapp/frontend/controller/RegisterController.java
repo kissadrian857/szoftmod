@@ -34,13 +34,21 @@ public class RegisterController {
 
     @PostMapping({ "/register"})
     public String LoginSubmit(@ModelAttribute User user, Model model) {
-        if (userService.save(user) == null)
-        {
-            return "redirect:/register";
+        if (user.getUserName().length() < 4) {
+            model.addAttribute("message", "Username needs to be at least 4 characters long.");
+            return LoginForm(model);
         }
-        else {
-            return "redirect:/login";
+        if (userService.findByUsername(user.getUserName()) != null) {
+            model.addAttribute("message", "Username already exists.");
+            return LoginForm(model);
         }
+        if (user.getPasswordHash().length() < 8) {
+            model.addAttribute("message", "Password needs to be at least 8 characters long.");
+            return LoginForm(model);
+        }
+        user.setCredits(100);
+        userService.save(user);
+        return "redirect:/login";
     }
 
 }
