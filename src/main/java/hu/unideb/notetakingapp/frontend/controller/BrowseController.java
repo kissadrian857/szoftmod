@@ -57,6 +57,7 @@ public class BrowseController {
             return "redirect:/login";
 
         Note actNote = noteService.findById(id);
+        User seller = actNote.getCreatorUser();
         User actUser = loggedInUserBean.getLoggedInUser();
         if (actUser.getCredits() >= actNote.getCreditValue()) {
             Purchase newPurchase = new Purchase();
@@ -64,9 +65,13 @@ public class BrowseController {
             newPurchase.setCustomerId(actUser.getId());
             newPurchase.setNote(actNote);
             newPurchase.setCreatorId(actNote.getCreatorUser().getId());
-            actUser.setCredits(actUser.getCredits() - actNote.getCreditValue());
             purchaseService.save(newPurchase);
+
+            actUser.setCredits(actUser.getCredits() - actNote.getCreditValue());
             userService.save(actUser);
+
+            seller.setCredits(seller.getCredits() + actNote.getCreditValue());
+            userService.save(seller);
         }
         return "redirect:/browse";
     }
