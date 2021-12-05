@@ -15,7 +15,7 @@ main {
     width: fit-content;
     height: 30%;
     margin: 1em;
-    padding: 1em 1.5em 1.5em 1.5em;
+    padding: 1.5em;
     background-color: white;
     box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;

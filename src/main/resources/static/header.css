@@ -23,6 +23,7 @@
 }
 
 button[type=submit] {
+    margin: 0.5em;
     transition: 1s ease;
     justify-content: center;
     padding: 0.5em;

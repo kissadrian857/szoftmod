@@ -55,14 +55,32 @@ article > form {
 
 
 input[type=text], textarea {
-	width: 100%;
-	padding: .3em;
-	background-color: whitesmoke;
-	margin-bottom:.5vh;
+    width: 100%;
+    padding: .3em;
+    background-color: whitesmoke;
+    margin-bottom: .5vh;
     border: 1px solid black;
 }
+
 textarea {
-    flex:auto;
+    flex: auto;
     resize: none;
 
 }
+
+.savebox {
+    align-self: center;
+    width: fit-content;
+    background-color: white;
+    border: 1px solid #000;
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5em;
+}
+
+input[type=number] {
+    width: 3em;
+}
+
