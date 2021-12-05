@@ -48,6 +48,8 @@ public class RegisterController {
         }
         user.setCredits(100);
         userService.save(user);
+        if (loggedInUserBean.login(user.getUserName(), user.getPasswordHash()))
+            return "redirect:/browse";
         return "redirect:/login";
     }
 
