@@ -15,25 +15,27 @@
         <div id="headercontainer">
             <p>Notes</p>
         </div>
-        <form th:action="@{/login}" th:object="${user}" method="post">
+        <form id="login-form" th:action="@{/login}" th:object="${user}" method="post">
             <input type="text" th:field="*{userName}" placeholder="Name" autofocus>
             <br/>
             <input type="password" th:field="*{passwordHash}" placeholder="Password">
             <br/>
             <div id="incorrect_credentials" th:if="${incorrect_credentials}">Incorrect credentials!</div>
-            <div >
-                <button class="login-button" type="submit" value="Login"  >
-                    <!--object type="image/svg+xml" data="jam-master/icons/log-in.svg" class = "ui-icon"></object-->
-                    <div th:insert="~{svgs/log-in-icon :: log-in-icon()}" class = "ui-icon"></div>
-                    <span>Login</span>
-                </button>
-            </div>
+
         </form>
-        <form th:action="@{/register}">
-            <button type="submit" th:value="Register">
-                Register
+        <div>
+            <button class="login-button ui-icon-container" type="submit" value="Login" form="login-form">
+                <!--object type="image/svg+xml" data="jam-master/icons/log-in.svg"></object-->
+                <span th:insert="~{svgs/log-in-icon :: log-in-icon()}"></span>
+                <span>Login</span>
             </button>
-        </form>
+            <form th:action="@{/register}">
+                <button type="submit" th:value="Register" class="ui-icon-container">
+                    <span th:insert="~{svgs/register-icon :: register-icon()}"></span>Register
+                </button>
+            </form>
+        </div>
+
     </div>
 </main>
 </body>

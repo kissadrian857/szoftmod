@@ -6,32 +6,45 @@
 
 <div>
     <form th:if="${loggedInUser != null && #request.getRequestURI() != '/editor' }" th:action="@{/editor}">
-        <button
-                type="submit" th:value="Editor">Editor
+        <button type="submit" th:value="Editor" class = "ui-icon-container">
+            <span th:insert="~{svgs/write-icon :: write-icon()}"></span>Editor
         </button>
     </form>
     <form th:if="${#request.getRequestURI() != '/browse'}" th:action="@{/browse}">
-        <button type="submit"
-                th:value="Browse">Browse
+        <button type="submit" th:value="Browse" class = "ui-icon-container">
+            <span th:insert="~{svgs/browse-icon :: browse-icon()}"></span>
+            Browse
         </button>
     </form>
-    <div class="user-menu">
-        <span th:if="${loggedInUser == null}">Not logged in.</span>
-        <span th:if="${loggedInUser != null}" th:text="|Logged in as ${loggedInUser.getUserName()}.|"></span>
+    <div class="user-menu card">
+        <div th:if="${loggedInUser == null}" class = "ui-icon-container">
+            <span th:insert="~{svgs/alien-icon :: alien-icon()}"></span>
+            Not logged in.
+        </div>
+        <div th:if="${loggedInUser != null}" class = "ui-icon-container">
+            <span th:insert="~{svgs/user-icon :: user-icon()}"></span>
+            <span th:text="${loggedInUser.getUserName()}"></span>
+        </div>
+
         <form th:if="${loggedInUser == null && #request.getRequestURI() != '/login' && #request.getRequestURI() != '/logout'}"
               th:action="@{/login}">
-            <button class="login-button" type="submit" th:value="Login">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -3 24 24" width="24" height="24">
-                    <path d="M6.641 9.828H1a1 1 0 1 1 0-2h5.641l-1.12-1.12a1 1 0 0 1 1.413-1.415L9.763 8.12a.997.997 0 0 1 0 1.415l-2.829 2.828A1 1 0 0 1 5.52 10.95l1.121-1.122zM13 0a1 1 0 0 1 1 1v16a1 1 0 0 1-2 0V1a1 1 0 0 1 1-1z"/>
-                </svg>
+            <button class="login-button ui-icon-container" type="submit" th:value="Login">
+                <span th:insert="~{svgs/log-in-icon :: log-in-icon()}"></span>
                 Login
             </button>
         </form>
         <form th:if="${loggedInUser != null}" th:action="@{/logout}">
-            <button class="logout-button" type="submit" th:value="Logout">
+            <button class="logout-button ui-icon-container" type="submit" th:value="Logout">
+                <span th:insert="~{svgs/log-out-icon :: log-out-icon()}"></span>
                 Logout
             </button>
         </form>
+        <div th:if="${loggedInUser != null}" class="ui-icon-container">
+            Credits:
+            <span th:if="${loggedInUser != null}" th:text="${loggedInUser.getCredits()}"></span>
+            <span th:insert="~{svgs/coin-icon :: coin-icon()}"></span>
+        </div>
+
     </div>
 </div>
 

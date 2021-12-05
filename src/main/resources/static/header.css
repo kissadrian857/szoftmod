@@ -47,3 +47,17 @@ button[type=submit]:hover svg {
     fill: whitesmoke;
 }
 
+.user-menu{
+    box-sizing: border-box;
+    margin: 0;
+    transition: none;
+}
+.user-menu:hover {
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ui-icon-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}

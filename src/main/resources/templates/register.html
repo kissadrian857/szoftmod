@@ -7,19 +7,24 @@
 </head>
 <body>
 <div class="page-header" th:insert="~{header :: header(${null})}"></div>
-<div class="bg"></div>
-<div class="card">
-    <div id="headercontainer">
-        <p>Register</p>
+<main>
+    <div class="card">
+        <div id="headercontainer">
+            <p>Register</p>
+        </div>
+        <form th:action="@{/register}" th:object="${user}" method="post">
+            <input type="text" th:field="*{userName}" placeholder="Name" autofocus>
+            <br/>
+            <input type="password" th:field="*{passwordHash}" placeholder="Password">
+            <br/>
+            <div id="incorrect_credentials" th:if="${message != null}" th:text="${message}"></div>
+            <div id="button_container">
+                <button type="submit" value="Register" class="ui-icon-container">
+                    <span th:insert="~{svgs/register-icon :: register-icon()}"></span>Register
+                </button>
+            </div>
+        </form>
     </div>
-    <form th:action="@{/register}" th:object="${user}" method="post">
-        <input type="text" th:field="*{userName}" placeholder="Name" autofocus>
-        <br/>
-        <input type="password" th:field="*{passwordHash}" placeholder="Password">
-        <br/>
-        <div id="incorrect_credentials" th:if="${message != null}" th:text="${message}"></div>
-        <div id="button_container"><input type="submit" value="Register"></div>
-    </form>
-</div>
+</main>
 </body>
 </html>
